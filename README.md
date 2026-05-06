@@ -9,6 +9,11 @@
 ## 目录
 
 ```
+scripts/                        team-protocol skill 调用的 helper 脚本
+  ├── dispatch-helper.py        生成派发 JSON (manager / dev / reviewer / scheduler-tick)
+  ├── scheduler-helper.py       scheduler tick 状态聚合 (TaskList / cron / CI)
+  └── test_scheduler-helper.py  pytest
+
 hooks/                          所有自定义 Claude Code hooks (Python + bash)
   ├── agent-precheck.py         派 dev 前的 blockedBy / defer_until / task subject 检查
   ├── askuserquestion-*.py      AskUserQuestion 的 night-shift 自治闸
@@ -27,7 +32,7 @@ skills/spec-pipeline/           把 design spec 拆成可并行执行 task DAG �
 
 ## 安装
 
-1. 把 `hooks/` 拷到 `~/.claude/hooks/`, 把 `skills/team-protocol` 和 `skills/spec-pipeline` 拷到 `~/.claude/skills/` 下。
+1. 把 `hooks/` 拷到 `~/.claude/hooks/`, `scripts/` 拷到 `~/.claude/scripts/`, 把 `skills/team-protocol` 和 `skills/spec-pipeline` 拷到 `~/.claude/skills/` 下。
 2. 按 `hooks/README.md` 在 `~/.claude/settings.json` 里把每个 hook 注册到对应事件。
 3. hook 脚本里的路径全部用 `os.path.expanduser("~/...")`, 跨用户不需要改源码。
 
